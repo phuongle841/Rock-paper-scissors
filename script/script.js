@@ -1,7 +1,9 @@
-
 function getComputerChoice(n) {
   let choice = ["rock", "paper", "scissors"];
-  return choice[n - 1];
+  min = 0;
+  max = 2;
+  let number = Math.floor(Math.random() * (max - min + 1) + min);
+  return choice[number];
 }
 function getWinner(playerSelection, computerSelection) {
   let decision = undefined;
@@ -10,13 +12,13 @@ function getWinner(playerSelection, computerSelection) {
   if (playerSelection === "rock") {
     switch (computerSelection) {
       case "rock":
-        decision = `Tie`;
+        decision = `tie`;
         break;
       case "paper":
-        decision = `Lose`;
+        decision = `lose`;
         break;
       case "scissors":
-        decision = `Win`;
+        decision = `win`;
         break;
       default:
         console.log("this is a special case needed to be studied");
@@ -25,13 +27,13 @@ function getWinner(playerSelection, computerSelection) {
   } else if (playerSelection === "paper") {
     switch (computerSelection) {
       case "rock":
-        decision = `Win`;
+        decision = `win`;
         break;
       case "paper":
-        decision = `Tie`;
+        decision = `tie`;
         break;
       case "scissors":
-        decision = `Lose`;
+        decision = `lose`;
         break;
       default:
         console.log("this is a special case needed to be studied");
@@ -40,24 +42,36 @@ function getWinner(playerSelection, computerSelection) {
   } else if (playerSelection === "scissors") {
     switch (computerSelection) {
       case "rock":
-        decision = `Lose`;
+        decision = `lose`;
         break;
       case "paper":
-        decision = `Win`;
+        decision = `win`;
         break;
       case "scissors":
-        decision = `Tie`;
+        decision = `tie`;
         break;
       default:
         console.log("this is a special case needed to be studied");
         break;
     }
   }
-  return `you ${decision}! ${playerSelection} vs ${computerSelection}`;
+  return decision;
 }
-
-for (let i = 1; i <= 3; i++) {
-  for (let j = 1; j <= 3; j++) {
-    console.log(getWinner(getComputerChoice(i), getComputerChoice(j)));
+function game() {
+  let playerScore = 0;
+  let computerScore = 0;
+  while (playerScore != 5 && computerScore != 5) {
+    let playerSelection = prompt("pick rock, paper, scissors", undefined);
+    let computerSelection = getComputerChoice();
+    let win = getWinner(playerSelection, computerSelection);
+    console.log(`${win}. ${playerSelection} vs ${computerSelection}`);
+    if (win === "win") {
+      playerScore++;
+      console.log(`player ` + playerScore);
+    } else if (win === "lose") {
+      computerScore++;
+      console.log(`computer ` + computerScore);
+    }
   }
 }
+game();

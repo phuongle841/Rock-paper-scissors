@@ -67,11 +67,10 @@ function game() {
     console.log(`${win}. ${playerSelection} vs ${computerSelection}`);
     if (win === "win") {
       playerScore++;
-      console.log(`player ` + playerScore);
     } else if (win === "lose") {
       computerScore++;
-      console.log(`computer ` + computerScore);
     }
+    console.log(`player ${playerScore} vs computer ${computerScore}`);
   }
 }
 game();

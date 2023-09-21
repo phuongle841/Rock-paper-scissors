@@ -60,8 +60,10 @@ function getWinner(playerSelection, computerSelection) {
 function game() {
   let playerScore = 0;
   let computerScore = 0;
-  while (playerScore != 5 && computerScore != 5) {
-    let playerSelection = prompt("pick rock, paper, scissors", undefined);
+  let rounds = 5;
+  while (playerScore != rounds && computerScore != rounds) {
+    // let playerSelection = prompt("pick rock, paper, scissors", undefined);
+    playerSelection = getComputerChoice();
     let computerSelection = getComputerChoice();
     let win = getWinner(playerSelection, computerSelection);
     console.log(`${win}. ${playerSelection} vs ${computerSelection}`);

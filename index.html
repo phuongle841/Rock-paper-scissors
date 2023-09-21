@@ -1,18 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock-paper-scissors</title>
     <script src="script/script.js" defer></script>
-    <link rel="stylesheet" href="style/style.css">
-</head>
-<body>
-    <div class="buttons">
-        <div class="button">Rock</div>
-        <div class="button">Paper</div>
-        <div class="button">Scissors</div>
+    <link rel="stylesheet" href="style/style.css" />
+  </head>
+  <body>
+    <div class="Match">Match</div>
+    <div class="score">
+        <p class="playerScore">0</p>
+        <p class="computerScore">0</p>
     </div>
-    <div class="computer">Rock</div>
-</body>
+    <div class="screen">
+      <div class="buttons">
+        <div class="button" id="rock">Rock</div>
+        <div class="button" id="paper">Paper</div>
+        <div class="button" id="scissors">Scissors</div>
+      </div>
+      <div class="computer">Waiting</div>
+    </div>
+    <div class="resultBox">++++++</div>
+  </body>
 </html>

@@ -1,3 +1,8 @@
+const choseRock = document.querySelector("#rock");
+const chosePaper = document.querySelector("#paper");
+const choseScissors = document.querySelector("#scissors");
+console.log(choseRock, chosePaper, choseScissors);
+const decisions = [choseRock, chosePaper, choseScissors];
 function getComputerChoice(n) {
   let choice = ["rock", "paper", "scissors"];
   min = 0;
@@ -63,16 +68,34 @@ function game() {
   let rounds = 5;
   while (playerScore != rounds && computerScore != rounds) {
     // let playerSelection = prompt("pick rock, paper, scissors", undefined);
-    playerSelection = getComputerChoice();
-    let computerSelection = getComputerChoice();
-    let win = getWinner(playerSelection, computerSelection);
-    console.log(`${win}. ${playerSelection} vs ${computerSelection}`);
+    // let computerSelection = getComputerChoice();
+    // let win = getWinner(playerSelection, computerSelection);
+    // console.log(`${win}. ${playerSelection} vs ${computerSelection}`);
     if (win === "win") {
       playerScore++;
     } else if (win === "lose") {
       computerScore++;
     }
-    console.log(`player ${playerScore} vs computer ${computerScore}`);
+    // console.log(`player ${playerScore} vs computer ${computerScore}`);
   }
 }
-game();
+
+
+function updateComputerInterface(computerSelection) {
+  const computer = document.querySelector(".computer");
+  computer.textContent = computerSelection;
+}
+function updateResultBox(winnerSlogan) {
+  const resultBox = document.querySelector(".resultBox");
+  resultBox.textContent = winnerSlogan;
+}
+decisions.forEach((decision) => {
+  decision.addEventListener("click", (e) => {
+    let playerSelection = `${e.target.getAttribute("id")}`;
+    let computerSelection = getComputerChoice();
+    let win = getWinner(playerSelection, computerSelection);
+    let winnerSlogan = `${win}`;
+    updateComputerInterface(computerSelection);
+    updateResultBox(winnerSlogan);
+  });
+});

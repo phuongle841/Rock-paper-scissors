@@ -1,7 +1,6 @@
 const choseRock = document.querySelector("#rock");
 const chosePaper = document.querySelector("#paper");
 const choseScissors = document.querySelector("#scissors");
-console.log(choseRock, chosePaper, choseScissors);
 const decisions = [choseRock, chosePaper, choseScissors];
 function getComputerChoice(n) {
   let choice = ["rock", "paper", "scissors"];
@@ -62,24 +61,23 @@ function getWinner(playerSelection, computerSelection) {
   }
   return decision;
 }
-function game() {
-  let playerScore = 0;
-  let computerScore = 0;
-  let rounds = 5;
-  while (playerScore != rounds && computerScore != rounds) {
-    // let playerSelection = prompt("pick rock, paper, scissors", undefined);
-    // let computerSelection = getComputerChoice();
-    // let win = getWinner(playerSelection, computerSelection);
-    // console.log(`${win}. ${playerSelection} vs ${computerSelection}`);
-    if (win === "win") {
-      playerScore++;
-    } else if (win === "lose") {
-      computerScore++;
-    }
-    // console.log(`player ${playerScore} vs computer ${computerScore}`);
+let playerScore = 0;
+let computerScore = 0;
+let rounds = 5;
+function CheckGame(win) {
+  if (win === "win") {
+    playerScore++;
+    updateResultPlayerScore(playerScore);
+  } else if (win === "lose") {
+    computerScore++;
+    updateResultComputerScore(computerScore);
+  }
+  if (playerScore === rounds || computerScore === rounds) {
+    // call the winner
+    console.log("working?");
+    callOutWinner();
   }
 }
-
 
 function updateComputerInterface(computerSelection) {
   const computer = document.querySelector(".computer");
@@ -89,6 +87,32 @@ function updateResultBox(winnerSlogan) {
   const resultBox = document.querySelector(".resultBox");
   resultBox.textContent = winnerSlogan;
 }
+function updateResultPlayerScore(score) {
+  const playerScore = document.querySelector(".playerScore");
+  playerScore.textContent = score;
+  return true;
+}
+function updateResultComputerScore(score) {
+  const playerScore = document.querySelector(".computerScore");
+  playerScore.textContent = score;
+  return true;
+}
+function makeWinnerBanner(winner) {
+  document.body.innerHTML = "";
+  let winnerBanner = document.createElement("p");
+  winnerBanner.textContent = `${winner} have win this challenge`;
+  document.body.classList.add("winningState");
+  document.body.appendChild(winnerBanner);
+}
+function callOutWinner() {
+  let winner = "";
+  if (computerScore == 5) {
+    winner = `computer`;
+  } else {
+    winner = `player`;
+  }
+  makeWinnerBanner(winner);
+}
 decisions.forEach((decision) => {
   decision.addEventListener("click", (e) => {
     let playerSelection = `${e.target.getAttribute("id")}`;
@@ -97,5 +121,6 @@ decisions.forEach((decision) => {
     let winnerSlogan = `${win}`;
     updateComputerInterface(computerSelection);
     updateResultBox(winnerSlogan);
+    CheckGame(win);
   });
 });
